@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hungry_app/features/auth/view/login_view.dart';
 import 'package:hungry_app/features/auth/view/singup_view.dart';
+import 'package:hungry_app/root.dart';
 import 'package:hungry_app/splash.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'hungery app',
-      home: const SingupView(),
+      home: const Root(),
     );
   }
 }
