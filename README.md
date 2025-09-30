@@ -1,2 +1,2 @@
 # hyngery_app
- kjhg oiuy oiuy oiuy
+ kjhg oiuy oiuy
