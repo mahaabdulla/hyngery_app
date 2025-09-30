@@ -35,9 +35,8 @@ class UserHeader extends StatelessWidget {
         ),
         const CircleAvatar(
           radius: 28,
-          // backgroundImage: AssetImage(
-          //   'assets/test/image 5.png',
-          // ),
+          backgroundColor: Color.fromARGB(255, 162, 216, 101),
+          child: Icon(CupertinoIcons.person, color: Colors.white),
         ),
       ],
     );
