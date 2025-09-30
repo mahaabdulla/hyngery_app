@@ -46,6 +46,7 @@ flutter:
     - assets/logo/
     - assets/splash/
     - assets/home/
+    - assets/test/
 
 
 

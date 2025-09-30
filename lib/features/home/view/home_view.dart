@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:hungry_app/core/constants/app_colors.dart';
-import 'package:hungry_app/sheared/custome_text.dart';
+import 'package:hungry_app/features/home/widgets/card_item.dart';
+import 'package:hungry_app/features/home/widgets/food_catgury.dart';
+import 'package:hungry_app/features/home/widgets/search_field.dart';
+import 'package:hungry_app/features/home/widgets/user_hearder.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -13,7 +13,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  List categuries = ['ALL', 'Combos', 'Sliders', 'Classic'];
+  List<String> categories = ['ALL', 'Combos', 'Sliders', 'Classic'];
   int selectedItem = 0;
 
   @override
@@ -21,101 +21,55 @@ class _HomeViewState extends State<HomeView> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 23),
-          child: Column(
-            children: [
-              Gap(50),
-              // headers
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/logo/Hungry_.svg',
-                        color: AppColors.primary,
-                        width: 180,
-                      ),
-                      Gap(10),
-                      CustomeText(
-                        text: 'Hello, Rich Sonic',
-                        size: 16,
-                        weight: FontWeight.w700,
-                        color: Colors.grey.shade500,
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  CircleAvatar(radius: 31),
-                ],
-              ),
+        backgroundColor: Colors.white,
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Gap(50),
 
-              Gap(20),
-              Material(
-                elevation: 2,
-                shadowColor: Colors.grey,
-                borderRadius: BorderRadius.circular(15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search ..',
-                    prefixIcon: Icon(CupertinoIcons.search),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.white),
+                    UserHeader(userName: 'Maha'),
+
+                    const Gap(20),
+
+                    SearchField(),
+
+                    const Gap(25),
+                    FoodCatgury(
+                      categories: categories,
+                      selectedItem: selectedItem,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                  ),
+
+                    const Gap(20),
+                  ],
                 ),
               ),
-              Gap(25),
+            ),
 
-              // sliders
-              SizedBox(
-                height: 50,
-
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categuries.length,
-                  itemBuilder: (ctx, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedItem = index;
-                        });
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 30,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color:
-                              selectedItem == index
-                                  ? AppColors.primary
-                                  : Color(0xffF3F4F6),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: CustomeText(
-                          weight: FontWeight.w500,
-                          text: categuries[index],
-                          color:
-                              selectedItem == index
-                                  ? Colors.white
-                                  : Colors.black54,
-                        ),
-                      ),
-                    );
-                  },
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              sliver: SliverGrid(
+                delegate: SliverChildBuilderDelegate((ctx, index) {
+                  return CardItem(
+                    image: 'assets/test/image 5.png',
+                    title: 'Cheeseburger',
+                    desc: 'Wensdy Burger',
+                    rating: '4.2',
+                  );
+                }, childCount: 10),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.72,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 12,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
