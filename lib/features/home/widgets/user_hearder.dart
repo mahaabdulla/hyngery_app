@@ -18,6 +18,7 @@ class UserHeader extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Gap(35),
             SvgPicture.asset(
               'assets/logo/Hungry_.svg',
               color: AppColors.primary,

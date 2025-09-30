@@ -24,34 +24,40 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: Colors.white,
         body: CustomScrollView(
           slivers: [
+            SliverAppBar(
+              pinned: true,
+              floating: false,
+              elevation: 0,
+              scrolledUnderElevation: 0,
+              toolbarHeight: 180,
+              backgroundColor: Colors.white,
+              automaticallyImplyLeading: false,
+              flexibleSpace: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
+                child: Column(
+                  children: [
+                    UserHeader(userName: 'Maha'),
+                    Gap(10),
+                    SearchField(),
+                  ],
+                ),
+              ),
+            ),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Gap(50),
-
-                    UserHeader(userName: 'Maha'),
-
-                    const Gap(20),
-
-                    SearchField(),
-
-                    const Gap(25),
-                    FoodCatgury(
-                      categories: categories,
-                      selectedItem: selectedItem,
-                    ),
-
-                    const Gap(20),
-                  ],
+                child: FoodCatgury(
+                  categories: categories,
+                  selectedItem: selectedItem,
                 ),
               ),
             ),
 
             SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate((ctx, index) {
                   return CardItem(
